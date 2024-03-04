@@ -1,7 +1,7 @@
 const success = require('../assets/images/success.png');
-const train = require('../assets/images/train.png');
+const Shamba = require('../assets/images/download8.jpg');
 
 export default {
     success,
-    train,
+    Shamba,
 }

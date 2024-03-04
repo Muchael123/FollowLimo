@@ -4,7 +4,7 @@ import { View, Text, FlatList, Image } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import { TextButton } from "../../components";
 
-const Onboarding = () => {
+const Onboarding = ({ navigation }) => {
   const ControlX = SIZES.width / 2;
   const currentIndex = useRef(0);
   const ScreenFlatListRef = useRef();
@@ -12,6 +12,7 @@ const Onboarding = () => {
   const [isLastItem, setIsLastItem] = useState(false);
   const HandleNextPress = () => {
     if (currentIndex.current < constants.onboarding_screens.length - 1) {
+      console.log("currentIndex.current", currentIndex.current);
       currentIndex.current += 1;
       const nextIndex = currentIndex.current; // corrected
       const offset = nextIndex * SIZES.width;
@@ -23,10 +24,13 @@ const Onboarding = () => {
         offset, // corrected
         animated: true,
       });
+      if (currentIndex.current === constants.onboarding_screens.length - 1) {
+        setIsLastItem(true);
+      }
+    } else {
+      navigation.navigate("Welcome");
     }
-    if (currentIndex.current === constants.onboarding_screens.length - 1) {
-      setIsLastItem(true);
-    }
+     
   };
 
   return (
@@ -56,7 +60,7 @@ const Onboarding = () => {
                   alignItems: "center",
                   justifyContent: "center",
                 }}
-              > 
+              >
                 <Image
                   source={item.image}
                   resizeMode="contain"
